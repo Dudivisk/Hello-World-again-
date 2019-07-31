@@ -1,0 +1,87 @@
+\documentclass[12pt]{article}
+\usepackage[margin = 2cm, top= 10cm]{geometry}
+\usepackage[utf8]{inputenc}
+%\usepackage[brazil]{babel}
+\usepackage{a4,graphics}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{braket}
+
+
+\begin{document}
+
+\section{Dúvidas}
+\subsection{Operador de Excitação F}
+
+Se entendi bem o que é dito na referência do Kimura. O operador F é um operador genérico de excitação, cuja ação seria levar de um dado autoestado do hamiltoniano a outro como:
+
+\begin{equation}
+F\ket{m} = b_n\ket{n}
+\end{equation}
+
+(ou talvez só do estado fundamental a outro estado, não tenho certeza):
+
+\begin{equation}
+F\ket{0} = b_n\ket{n}
+\end{equation}
+
+Além das dúvidas conceituais, tenho algumas dúvidas operacionais acerca desse operador. Logo na primeira página do Kimura (entre as equações (2) e (3)) ele escreve os momentos $m_1$ e $m_3$ em função de comutadores de F com o Hamiltoniano. Como:
+
+\begin{equation}
+m_1 \equiv \sum_n |\braket{0|F|n}|^2(\hbar \omega_{n0}) = \frac{1}{2}\braket{0|[F^\dagger,[H,F]]|0} \label{mom}
+\end{equation}
+
+Não entendi porque essa igualdade é válida. Tentei partir do lado direito da equação para chegar ao lado esquerdo. Não sei se há uma maneira mais direta de atuar esses comutadores de F com H nos estados, então o que fiz foi expandir:
+
+\begin{equation}
+[F^\dagger,[H,F]] = FHF^\dagger + F^\dagger FH - HFF^\dagger - F^\dagger FH
+\end{equation}
+
+E, quanto à atuação de $F$ e $F^\dagger$ em $\ket{0}$, fiz as seguintes hipóteses:
+
+\begin{eqnarray}
+\textbf{hipótese 1}:& \qquad F\ket{0}=& b_n\ket{n}, \qquad n>0 \\ \nonumber \\
+\textbf{hipótese 2}:& \qquad F\ket{m}=& c_n\ket{n} \; \Rightarrow \; F^\dagger \ket{n}=\bar{c}_n\ket{m}
+\end{eqnarray}
+
+A hipótese \textbf{2} diz simplesmente que $F^\dagger$ promove a transição inversa em relação a $F$ -- Não tenho nenhuma boa justificativa para ela; simplesmente apelei pra um propriedade de um exemplo conhecido (os operadores $a$ e $a^\dagger$ do oscilador harmônico). De modo semelhante, extrapolei a noção de $F$ como um operador de "levantamento", e $F^\dagger$ como um operador de "abaixamento" de estados, para concluir:
+
+\begin{equation}
+F^\dagger \ket{0} = 0 = \bra{0}F
+\end{equation}
+
+Desse modo, o lado direito da equação \ref{mom} fica:
+
+\begin{eqnarray}
+\frac{1}{2}\braket{0|[F^\dagger,[H,F]]|n} &=& \frac{1}{2}\bigl(\braket{0|F^\dagger HF|0} - \braket{0|F^\dagger F H|n} \bigl) \\
+&=& \frac{1}{2}\bigl(b_nE_n\braket{n|F|0} - b_nE_0\braket{n|F|0} \bigl) \\
+&=& \frac{b_n}{2}\bigl(E_n - E_0 \bigl)\braket{n|F|0} \\
+&=& \frac{b_n}{2} (\hbar \omega_{n0}) \braket{n|F|0}
+\end{eqnarray}
+
+Que tem alguma semelhança com o momento $m_1$, mas estão longe de serem idênticos. Não consigo imaginar qual o procedimento (corrigindo as hipóteses e levando as contas adiante) fazem aparecer aquela soma sobre todos os estados, e como aparecem produtos para que $\braket{n|F|0}$ apareça em módulo quadrado.
+\vspace{0.2cm}
+
+(talvez identidade de Jabobi e alguma propriedade do comutador $[F,F^\dagger]$?).
+\vspace{0.7cm}
+
+E, aliás, o operador $FF^\dagger$ é, por construção, hermitiano. E, caso a hipótese (\textbf{2}) esteja correta, os autoestados $\ket{n}$ do hamiltoniano, também são autoestados desse operador. Talvez a conta correta use algo nesse sentido?
+
+\section{Alguns Comutadores}
+
+Fiquei com dúvidas também no cálculo de alguns comutadores, quando aparecem aqueles casos menos triviais de $[H,[H,F]]$. Você havia mencionado que, no caso de comutadores do tipo $[\mathbf{p}_i,f(\mathbf{x}_i-\mathbf{x}_j)]$ era necessário expandir $f$ numa série de potências. Mas contas desse tipo não saem simplesmente(?):
+
+\begin{equation}
+  \begin{aligned}
+	\Bigl[ \frac{\partial}{\partial x_i},f(\mathbf{x}_i-\mathbf{x}_j) \Bigl]\psi & = \frac{\partial}{\partial x_i}(f(\mathbf{x}_i-\mathbf{x}_j)\psi) - f(\mathbf{x}_i-\mathbf{x}_j)\frac{\partial \psi}{\partial x_i} \\
+	& = \frac{\partial}{\partial x_i}(f(\mathbf{x}_i-\mathbf{x}_j))\psi \\ \\
+	\Rightarrow \Bigl[ \frac{\partial}{\partial x_i},f(\mathbf{x}_i-\mathbf{x}_j) \Bigl] & = \frac{\partial f}{\partial x_i}(\mathbf{x}_i-\mathbf{x}_j)
+  \end{aligned} \label{comm}
+\end{equation}
+
+E, no caso de uma expansão em série de potências, em que argumento deveria realizar essa expansão (imagino que $\mathbf{x} \equiv \mathbf{x}_i-\mathbf{x}_j$ ou simplesmente $\mathbf{x}_i$)? E em torno de que ponto (se é que o ponto central da expansão é relevante. Pergunto porque normalmente fazemos essas expansões em torno da origem, e em geral nosso potencias têm singularidades na origem).
+
+Outra dúvida que eu tenho é de como calcular comutadores de $\mathbf{p}_i$ com deltas de Dirac. Não sei como se lida com derivadas nesse caso, e muito menos como expandir a delta em séries de potência (ou seria o caso de manter uma expressão do tipo da equação \ref{comm}, já que só nos interessam valores médios desses operadores, de modo que a delta -- ou derivadas suas -- sempre aparecem sob um sinal de integração?). 
+
+\end{document} 
